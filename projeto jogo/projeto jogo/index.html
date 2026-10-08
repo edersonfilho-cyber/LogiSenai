@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogiSENAI - Desafio Logístico</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= MENU ================= -->
+
+    <div id="menu" class="tela ativa">
+
+        <div class="menu-box">
+
+            <div class="logo">📦</div>
+
+            <h1>LogiSENAI</h1>
+
+            <h2>Desafio do Centro de Distribuição</h2>
+
+            <p>
+                Organize o estoque, separe os pedidos,
+                compre melhorias e torne-se o melhor
+                operador logístico!
+            </p>
+
+            <button id="btnIniciar">
+                🚚 INICIAR OPERAÇÃO
+            </button>
+
+            <div class="controles">
+                <strong>WASD / SETAS</strong> — Mover<br>
+                <strong>E</strong> — Pegar / Entregar<br>
+                <strong>SHIFT</strong> — Correr
+            </div>
+
+            <p class="dinheiro-menu">
+                💰 Dinheiro:
+                <strong id="dinheiroMenu">R$ 0</strong>
+            </p>
+
+            <p class="recorde">
+                🏆 Recorde:
+                <span id="recorde">0</span>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= JOGO ================= -->
+
+    <div id="jogo" class="tela">
+
+        <header>
+
+            <div class="titulo">
+                📦 LogiSENAI
+            </div>
+
+            <div class="status">
+
+                <span>
+                    💰 R$ <b id="dinheiro">0</b>
+                </span>
+
+                <span>
+                    🏆 <b id="pontos">0</b>
+                </span>
+
+                <span>
+                    ⭐ Nível <b id="nivel">1</b>
+                </span>
+
+                <span>
+                    📦 <b id="entregues">0</b>/<b id="meta">5</b>
+                </span>
+
+                <span>
+                    ❤️ <b id="vidas">3</b>
+                </span>
+
+                <span>
+                    ⏱️ <b id="tempo">120</b>
+                </span>
+
+                <button id="btnLoja" class="botao-loja">
+                    🛒 LOJA
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <div class="area-jogo">
+
+            <!-- ================= PAINEL ================= -->
+
+            <aside>
+
+                <div class="painel">
+
+                    <h3>📋 PEDIDO ATUAL</h3>
+
+                    <div id="pedido"></div>
+
+                </div>
+
+
+                <div class="painel">
+
+                    <h3>🎒 CARGA</h3>
+
+                    <div id="carga"></div>
+
+                    <div class="capacidade">
+                        Capacidade:
+                        <strong id="capacidadeAtual">4</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="painel">
+
+                    <h3>📊 DESEMPENHO</h3>
+
+                    <p>
+                        Combo:
+                        <strong id="combo">x0</strong>
+                    </p>
+
+                    <p>
+                        Precisão:
+                        <strong id="precisao">100%</strong>
+                    </p>
+
+                    <p>
+                        Velocidade:
+                        <strong id="velocidadeAtual">Normal</strong>
+                    </p>
+
+                    <p>
+                        Equipamento:
+                        <strong id="equipamentoAtual">A pé</strong>
+                    </p>
+
+                </div>
+
+
+                <div class="painel">
+
+                    <h3>🎮 CONTROLES</h3>
+
+                    <p>⬆️⬇️⬅️➡️ / WASD — Mover</p>
+                    <p>🅴 — Interagir</p>
+                    <p>⚡ SHIFT — Correr</p>
+                    <p>🛒 — Abrir loja</p>
+
+                </div>
+
+            </aside>
+
+
+            <!-- ================= ARMAZÉM ================= -->
+
+            <main>
+
+                <div id="armazem">
+
+                    <div class="grade"></div>
+
+
+                    <div class="texto estoque">
+                        📦 ESTOQUE
+                    </div>
+
+
+                    <!-- PRATELEIRA A -->
+
+                    <div class="prateleira prateleira-a">
+
+                        <div class="titulo-prateleira">
+                            A
+                        </div>
+
+                        <div
+                            class="produto"
+                            data-id="A01"
+                        >
+                            🔵
+                            <small>A01</small>
+                        </div>
+
+                        <div
+                            class="produto"
+                            data-id="A02"
+                        >
+                            🔴
+                            <small>A02</small>
+                        </div>
+
+                        <div
+                            class="produto"
+                            data-id="A03"
+                        >
+                            🟢
+                            <small>A03</small>
+                        </div>
+
+                    </div>
+
+
+                    <!-- PRATELEIRA B -->
+
+                    <div class="prateleira prateleira-b">
+
+                        <div class="titulo-prateleira">
+                            B
+                        </div>
+
+                        <div
+                            class="produto"
+                            data-id="B01"
+                        >
+                            ⚙️
+                            <small>B01</small>
+                        </div>
+
+                        <div
+                            class="produto"
+                            data-id="B02"
+                        >
+                            🔌
+                            <small>B02</small>
+                        </div>
+
+                        <div
+                            class="produto"
+                            data-id="B03"
+                        >
+                            🔧
+                            <small>B03</small>
+                        </div>
+
+                    </div>
+
+
+                    <!-- PRATELEIRA C -->
+
+                    <div class="prateleira prateleira-c">
+
+                        <div class="titulo-prateleira">
+                            C
+                        </div>
+
+                        <div
+                            class="produto"
+                            data-id="C01"
+                        >
+                            📦
+                            <small>C01</small>
+                        </div>
+
+                        <div
+                            class="produto"
+                            data-id="C02"
+                        >
+                            📦
+                            <small>C02</small>
+                        </div>
+
+                        <div
+                            class="produto"
+                            data-id="C03"
+                        >
+                            🥚
+                            <small>C03</small>
+                        </div>
+
+                    </div>
+
+
+                    <!-- OBSTÁCULOS -->
+
+                    <div class="obstaculo obstaculo1">
+                        🚧
+                    </div>
+
+                    <div class="obstaculo obstaculo2">
+                        🛒
+                    </div>
+
+
+                    <div id="empilhadeira">
+                        🏗️
+                    </div>
+
+
+                    <!-- EXPEDIÇÃO -->
+
+                    <div id="expedicao">
+
+                        <div class="caminhao">
+                            🚚
+                        </div>
+
+                        <strong>
+                            EXPEDIÇÃO
+                        </strong>
+
+                        <small>
+                            Aperte E para entregar
+                        </small>
+
+                    </div>
+
+
+                    <!-- JOGADOR -->
+
+                    <div id="jogador">
+                        🧑‍🔧
+                    </div>
+
+
+                    <div id="dica"></div>
+
+                </div>
+
+            </main>
+
+        </div>
+
+
+        <div id="mensagem"></div>
+
+    </div>
+
+
+    <!-- ================= LOJA ================= -->
+
+    <div id="loja" class="tela">
+
+        <div class="loja-box">
+
+            <div class="loja-header">
+
+                <div>
+                    <h1>🏪 LOJA DE MELHORIAS</h1>
+
+                    <p>
+                        Invista seu dinheiro para melhorar
+                        sua operação logística.
+                    </p>
+                </div>
+
+                <div class="saldo">
+                    💰 R$ <strong id="dinheiroLoja">0</strong>
+                </div>
+
+            </div>
+
+
+            <div class="loja-itens">
+
+
+                <!-- EMPILHADEIRA -->
+
+                <div class="item-loja">
+
+                    <div class="icone-loja">
+                        🏗️
+                    </div>
+
+                    <div class="info-loja">
+
+                        <h2>
+                            Empilhadeira
+                        </h2>
+
+                        <p>
+                            Troque o operador por uma
+                            empilhadeira. Você fica muito
+                            mais rápido.
+                        </p>
+
+                        <span id="nivelEmpilhadeira">
+                            Nível 0
+                        </span>
+
+                    </div>
+
+                    <button
+                        id="comprarEmpilhadeira"
+                        class="comprar"
+                    >
+                        Comprar<br>
+                        💰 R$ <span>500</span>
+                    </button>
+
+                </div>
+
+
+                <!-- VELOCIDADE -->
+
+                <div class="item-loja">
+
+                    <div class="icone-loja">
+                        ⚡
+                    </div>
+
+                    <div class="info-loja">
+
+                        <h2>
+                            Motor aprimorado
+                        </h2>
+
+                        <p>
+                            Aumenta a velocidade de
+                            movimentação do operador.
+                        </p>
+
+                        <span id="nivelVelocidade">
+                            Nível 0
+                        </span>
+
+                    </div>
+
+                    <button
+                        id="comprarVelocidade"
+                        class="comprar"
+                    >
+                        Comprar<br>
+                        💰 R$ <span>300</span>
+                    </button>
+
+                </div>
+
+
+                <!-- CARRINHO -->
+
+                <div class="item-loja">
+
+                    <div class="icone-loja">
+                        🎒
+                    </div>
+
+                    <div class="info-loja">
+
+                        <h2>
+                            Carrinho maior
+                        </h2>
+
+                        <p>
+                            Aumenta a quantidade de
+                            produtos que você pode carregar.
+                        </p>
+
+                        <span id="nivelCarga">
+                            Capacidade 4
+                        </span>
+
+                    </div>
+
+                    <button
+                        id="comprarCarga"
+                        class="comprar"
+                    >
+                        Comprar<br>
+                        💰 R$ <span>400</span>
+                    </button>
+
+                </div>
+
+
+                <!-- PICKING -->
+
+                <div class="item-loja">
+
+                    <div class="icone-loja">
+                        📦
+                    </div>
+
+                    <div class="info-loja">
+
+                        <h2>
+                            Picking rápido
+                        </h2>
+
+                        <p>
+                            Aumenta o alcance para pegar
+                            produtos e agiliza a operação.
+                        </p>
+
+                        <span id="nivelPicking">
+                            Nível 0
+                        </span>
+
+                    </div>
+
+                    <button
+                        id="comprarPicking"
+                        class="comprar"
+                    >
+                        Comprar<br>
+                        💰 R$ <span>350</span>
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                id="btnFecharLoja"
+                class="fechar-loja"
+            >
+                ↩ VOLTAR AO JOGO
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FINAL ================= -->
+
+    <div id="final" class="tela">
+
+        <div class="resultado">
+
+            <div class="trofeu">
+                🏆
+            </div>
+
+            <h1 id="tituloFinal">
+                OPERAÇÃO CONCLUÍDA!
+            </h1>
+
+            <p id="textoFinal"></p>
+
+
+            <div class="estatisticas">
+
+                <div>
+                    🏆
+                    <strong id="pontuacaoFinal">
+                        0
+                    </strong>
+                    <small>
+                        Pontos
+                    </small>
+                </div>
+
+                <div>
+                    💰
+                    <strong id="dinheiroFinal">
+                        0
+                    </strong>
+                    <small>
+                        Dinheiro
+                    </small>
+                </div>
+
+                <div>
+                    ⭐
+                    <strong id="nivelFinal">
+                        1
+                    </strong>
+                    <small>
+                        Nível
+                    </small>
+                </div>
+
+            </div>
+
+
+            <button id="btnNovamente">
+                🔄 JOGAR NOVAMENTE
+            </button>
+
+            <button id="btnMenu">
+                🏠 MENU
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
